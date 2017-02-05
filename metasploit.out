@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section*.1}{Basic usage}{}% 1
+\BOOKMARK [2][-]{section*.2}{In-module options}{section*.1}% 2
+\BOOKMARK [2][-]{section*.3}{Meterpreter}{section*.1}% 3
+\BOOKMARK [2][-]{section*.4}{Sessions and jobs management}{section*.1}% 4
+\BOOKMARK [2][-]{section*.5}{Nessus integration}{section*.1}% 5
+\BOOKMARK [2][-]{section*.6}{Scanning}{section*.1}% 6
+\BOOKMARK [1][-]{section*.7}{Post Exploitation}{}% 7
+\BOOKMARK [2][-]{section*.8}{Privilege Escalation}{section*.7}% 8
+\BOOKMARK [3][-]{section*.9}{Windows}{section*.8}% 9
+\BOOKMARK [2][-]{section*.10}{Linux}{section*.7}% 10
+\BOOKMARK [2][-]{section*.11}{Mantaining Access}{section*.7}% 11
+\BOOKMARK [2][-]{section*.12}{Lateral Movement}{section*.7}% 12
+\BOOKMARK [2][-]{section*.13}{Pivoting}{section*.7}% 13
+\BOOKMARK [2][-]{section*.14}{Pillaging}{section*.7}% 14

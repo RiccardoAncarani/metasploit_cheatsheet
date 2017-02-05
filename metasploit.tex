@@ -1,0 +1,255 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{hyperref}
+
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+	{ \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+
+% Turn off header and footer
+\pagestyle{empty}
+ 
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+\begin{multicols}{2}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\textbf{Metasploit Cheat Sheet}} \\
+\end{center}
+
+\section{Basic usage}
+\begin{tabular}{@{}ll@{}}
+\verb!msfconsole!    & Start the interactive console \\
+\verb!db_status!  & Check the status of postgre\\
+\verb!service postgresql start! & Start the postgre service \\
+\verb!help!  & Shows the list of commands\\
+\verb!help [command]!  & Shows specific help\\ 
+\verb!search [term]!  & Search in all modules\\
+\verb!help search!  & Search options\\
+\verb!hosts!  & Show discovered hostst\\
+\verb!services -u!  & Discov. services\\
+\verb!workspace!  & List workspaces\\
+\end{tabular}
+
+\subsection{In-module options}
+\begin{tabular}{@{}ll@{}}
+\verb!use [module]!  & Use target module\\
+\verb!options!  & Shows current module options\\
+\verb!set [option] [value]!  & Set target option\\
+\verb!setg [option] [value]!  & Set a global variable\\
+\verb!show targets!  & Show exploit targets\\
+\verb!show payloads!  & Show avaiable payloads\\
+\verb!show advanced!  & Show advanced settings\\
+\verb!exploit!  & Launch current exploit/module\\
+\verb!exploit -j!  & Launch exploit as a job\\
+\\
+Only in payload module:\\
+\verb!generate -h!  & Show generate options\\
+\verb!generate!  & Generate default shellcode\\
+\verb!generate -e [encoder]!  & Generate with encoder\\
+\verb!generate -t [format]!  & Generate specific format\\
+\verb!generate -x -k [template]!  & Backdoor exe\\
+\verb!generate -f [file]!  & Output file\\
+\end{tabular}
+
+\newlength{\MyLen}
+\settowidth{\MyLen}{\texttt{letterpaper}/\texttt{a4paper} \ }
+
+\subsection{Meterpreter}
+\begin{tabular}{@{}ll@{}}
+\verb!sysinfo!    & Basic system info\\
+\verb!getuid!  & Get the current username\\
+\verb!getsystem! & Try to elevate privileges\\
+\verb!netstat!  & Shows active connections\\
+\verb!ipconfig!  & Shows network interfaces\\ 
+\verb!arp!  & Display arp table\\ 
+\verb!route!  & Display routing table\\ 
+\verb!hashdump!  & Dump hashes\\
+\verb!run hashdump!  & Different hash dump\\
+\verb!run [module] [options]!  & Run specific module\\
+\verb!background!  & Background session\\
+\verb!ps!  & Show running processes\\
+\verb!migrate [pid]!  & Migrate to process\\
+\verb!run post/windows/manage/migrate!  &\\
+\verb!upload [file] .!  & Upload file\\
+\verb!download [file] !  & Download file\\
+\verb!load [module]!  & Load a module	\\
+\end{tabular}
+
+\subsection{Sessions and jobs management}
+\begin{tabular}{@{}ll@{}}
+\verb!sessions!    & List all the sessions\\
+\verb!sessions -i [id]!  & Interact with session\\
+\verb!sessions -k [id]! & Kill a session \\
+\verb!sessions -K!  & Kills all sessions\\
+\verb!jobs!  & Active jobs\\ 
+\verb!jobs -k [id]!  & Kill a job\\
+\verb!jobs -K!  & Kill all jobs\\
+\end{tabular}
+
+
+\subsection{Nessus integration}
+\begin{tabular}{@{}ll@{}}
+\verb!load nessus!    & \\
+\verb!nessus_connect! & \\ 
+\verb![user]:[pwd]@[address] ssl_verify!  & \\
+\verb!nessus_policy_list! & \\
+\verb!nessus_scan_new [pol id] [name] [target]!  &\\
+\verb!nessus_scan_status! & \\
+\verb!nessus_report_list! &\\
+\verb!nessus_report_get [id]! & \\
+\end{tabular}\\
+To keep Nessus updates, run frequently: \verb!nessuscli update --all!
+
+\subsection{Scanning}
+\settowidth{\MyLen}{\texttt{.begin.description.}}
+\begin{tabular}{@{}ll@{}}
+\verb!db_nmap [opts] !        &  Run classic nmap \\
+\verb!use auxiliary/scanner/portscan/syn!          &  Syn scanner \\
+\verb!use auxiliary/scanner/portscan/tcp!      &  Tcp scanner \\
+\verb!use auxiliary/scanner/smb/smb_version!          &  Check SMB version \\
+\verb!use auxiliary/scanner/smb/smb_login!          &  SMB login brute\\
+
+\end{tabular}
+
+
+\section{Post Exploitation}
+\subsection{Privilege Escalation}
+\subsubsection{Windows}
+\settowidth{\MyLen}{\texttt{.begin.description.}}
+\begin{tabular}{@{}ll@{}}
+\verb!sysinfo!        &  Basic system info. \\
+\verb!getuid!          &  Current username \\
+\verb!run post/windows/gather/win_privs!      &  Privileges \\
+\verb!run winenum!          &  Dump Windows info.\\
+\verb!getsystem!          &  Try to escalate \\
+\verb!post/multi/recon/local_exploit_suggester!          &  Suggester\\
+\verb!exploit/[OS]/local!          &  Local exploit modules \\
+\verb!exploit/windows/local/bypassuac!          &  Bypass UAC\\
+\verb!post/windows/gather/enum_patches!          &  Enum Win Patches\\
+\verb!load incognito!          &  Loads incognito \\
+\verb!list_tokens -u!          &  List tokens \\
+\verb!impersonate_token [token]!          &  Use token\\
+\verb!load mimikatz!          &  Loads mimikatz\\
+\verb!wdigest!          &  Dump clear pwd \\
+
+\end{tabular}
+
+\subsection{Linux}
+\settowidth{\MyLen}{\texttt{.begin.description.}}
+\begin{tabular}{@{}ll@{}}
+\verb!run post/linux/gather/enum_system!          &  Linux sysinfo\\
+\verb!post/linux/gather/checkvm!          &  Check if in a VM\\
+\verb!post/linux/gather/enum_configs!          &  Dump /etc/files\\
+\verb!post/linux/gather/enum_network !          &  Enum network info\\
+\verb!post/linux/gather/enum_system  !          &  Dump info\\
+\verb!post/linux/gather/enum_users_history  !          &  Dump command history\\
+\verb!post/multi/gather/ssh_creds  !          &  Dump .ssh keys (lateral)\\
+\end{tabular}
+%---------------------------------------------------------------------------
+
+
+\subsection{Mantaining Access}
+\settowidth{\MyLen}{\texttt{.begin.description.}}
+\begin{tabular}{@{}ll@{}}
+\verb!run persistence !        &  Persistence module \\
+\verb!run getgui -e -u [usr] -p [psw]!          &  Enable RDP and add user\\
+\verb!post/windows/manage/sticky_keys!          &  Sticky keys backdoor\\
+
+\end{tabular}
+
+\subsection{Lateral Movement}
+\settowidth{\MyLen}{\texttt{.begin.description.}}
+\begin{tabular}{@{}ll@{}}
+\verb!run arpscan -r [range] !        &  Scan for host in the net \\
+Pass the hash:\\
+\verb!hashdump !        &  Dump hashes \\
+\verb!use exploit/windows/smb/psexec!          &  Psexec module\\
+Ssh lateral movement:\\
+\verb!post/multi/gather/ssh_creds!          &  Psexec module\\
+\verb!auxiliary/scanner/ssh/ssh_login_pubkey!          &  Ssh login with keys\\
+\end{tabular}
+
+
+\subsection{Pivoting}
+\settowidth{\MyLen}{\texttt{.begin.description.}}
+\begin{tabular}{@{}ll@{}}
+\verb!run autoroute -s 10.0.0.0/24 !        &  Add route \\
+\verb!portfwd add -l [lport] -r [rhost] -p [rport] !          &  Port forward\\
+\verb!use auxiliary/server/socks4a!        &  Socks4 proxy \\
+\verb!proxychains4 -q [command]!        &  Proxy through socks4a\\
+\end{tabular}
+
+
+
+\subsection{Pillaging}
+\settowidth{\MyLen}{\texttt{.begin.description.}}
+\begin{tabular}{@{}ll@{}}
+\verb!post/windows/gather/enum_applications!        &  Enum installed apps. \\
+\verb!post/windows/gather/enum_logged_on_users!          &  Enum logged in users\\
+\verb!post/windows/gather/enum_shares !      &  Enum shares\\
+\verb!post/windows/gather/enum_snmp!          &  Enum SNMP informations\\
+\verb!post/windows/gather/usb_history!          &  Print USB history \\
+\verb!post/windows/gather/enum_domain!          &  Dump active domain hosts\\
+\end{tabular}
+
+
+\rule{0.3\linewidth}{0.25pt}
+\scriptsize
+
+Copyright \copyright\ Ancarani Riccardo
+
+
+
+
+\end{multicols}
+\end{document}
