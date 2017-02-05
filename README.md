@@ -11,3 +11,5 @@ This cheatsheet includes:
 + Lateral Movement
 
 > **NOTE:** Some commands are duplicated, I know.
+
+If you want to contribute in any way, feel free to do it!
